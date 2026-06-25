@@ -184,28 +184,7 @@ const disks=[];
   g.position.set(d.x,d.y,-1); g.rotation.set(0.3,0.4,0.2); g.userData={phase:i*1.3,baseY:d.y}; world.add(g); disks.push(g);
 });
 
-/* ════════ ДҮР (оригинал SVG) ════════ */
-const CHARACTER_IMAGE="";
-const MASCOT_SVG=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 400'>
-<ellipse cx='100' cy='95' rx='52' ry='58' fill='#6b4a3a'/>
-<rect x='82' y='250' width='14' height='70' rx='7' fill='#f7d9bd'/><rect x='104' y='250' width='14' height='70' rx='7' fill='#f7d9bd'/>
-<ellipse cx='89' cy='325' rx='12' ry='8' fill='#5a4a6a'/><ellipse cx='111' cy='325' rx='12' ry='8' fill='#5a4a6a'/>
-<path d='M70 140 L130 140 L150 260 L50 260 Z' fill='#ff7fb0'/>
-<rect x='80' y='120' width='8' height='30' fill='#ff7fb0'/><rect x='112' y='120' width='8' height='30' fill='#ff7fb0'/>
-<rect x='52' y='150' width='12' height='60' rx='6' fill='#f7d9bd'/><rect x='136' y='150' width='12' height='60' rx='6' fill='#f7d9bd'/>
-<circle cx='100' cy='95' r='42' fill='#f7d9bd'/>
-<path d='M58 90 Q60 48 100 48 Q140 48 142 90 Q120 70 100 72 Q80 70 58 90 Z' fill='#6b4a3a'/>
-<ellipse cx='86' cy='98' rx='5' ry='7' fill='#3a2a3a'/><ellipse cx='114' cy='98' rx='5' ry='7' fill='#3a2a3a'/>
-<circle cx='76' cy='110' r='6' fill='#ffb3c8' opacity='0.7'/><circle cx='124' cy='110' r='6' fill='#ffb3c8' opacity='0.7'/>
-<path d='M92 112 Q100 120 108 112' stroke='#a05a6a' stroke-width='3' fill='none' stroke-linecap='round'/></svg>`;
-let charMesh=null;
-new THREE.TextureLoader().load(CHARACTER_IMAGE||("data:image/svg+xml;base64,"+btoa(MASCOT_SVG)),(tx)=>{
-  const ar=(tx.image.width/tx.image.height)||0.5, h=2.6, w=h*ar;
-  charMesh=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tx,transparent:true}));
-  charMesh.position.set(0,-0.6,-0.2); world.add(charMesh);
-});
-const ring=new THREE.Mesh(new THREE.RingGeometry(0.6,0.8,32),new THREE.MeshBasicMaterial({color:0xff9ecf,transparent:true,opacity:0.5,side:THREE.DoubleSide}));
-ring.rotation.x=-Math.PI/2; ring.position.set(0,-2.0,-0.2); world.add(ring);
+/* ════════ ДҮР устгагдсан (охин SVG + ягаан цагираг авсан) ════════ */
 
 /* ════════ НЕОН КРИСТАЛУУД ════════ */
 const GEMS=[
@@ -258,8 +237,6 @@ function loop(){
   });
   disks.forEach(d=>{d.rotation.y+=0.01; d.position.y=d.userData.baseY+Math.sin(t*0.8+d.userData.phase)*0.3;});
   pc.position.y=0.1+Math.sin(t*0.6)*0.08;
-  if(charMesh) charMesh.position.y=-0.6+Math.sin(t*0.7)*0.06;
-  ring.material.opacity=0.35+Math.sin(t*2)*0.15;
   moon.position.y=3.6+Math.sin(t*0.4)*0.15;
   saturn.rotation.y+=0.0015;
   bigStarsMat.opacity=0.7+Math.sin(t*2)*0.25;          // одод анивчина
